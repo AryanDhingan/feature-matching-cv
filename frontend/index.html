@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feature Matcher | Computer Vision</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-icon">FM</div>
+            <div>
+                <h2>Feature Matcher</h2>
+                <span>Computer Vision Lab</span>
+            </div>
+        </div>
+
+        <div class="nav-badge">
+            ORB · SIFT · BFMatcher
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">
+                <span class="status-dot"></span>
+                FEATURE MATCHING SYSTEM
+            </div>
+
+            <h1>
+                Discover Common Features<br>
+                <span>Between Two Images</span>
+            </h1>
+
+            <p>
+                Upload two images and analyze their visual correspondence
+                using ORB or SIFT feature detection with BFMatcher.
+            </p>
+        </section>
+
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+
+            <div class="image-upload-card">
+
+                <div class="upload-number">01</div>
+
+                <div class="upload-content">
+                    <div class="upload-icon">↑</div>
+
+                    <h3>Upload Image 1</h3>
+
+                    <p>
+                        Drag & drop your first image here
+                        or browse your files
+                    </p>
+
+                    <button class="browse-button">
+                        Browse Image
+                    </button>
+
+                    <input
+                        type="file"
+                        id="image1"
+                        accept="image/*"
+                        hidden
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="connector">
+                <span>VS</span>
+            </div>
+
+
+            <div class="image-upload-card">
+
+                <div class="upload-number">02</div>
+
+                <div class="upload-content">
+                    <div class="upload-icon">↑</div>
+
+                    <h3>Upload Image 2</h3>
+
+                    <p>
+                        Drag & drop your second image here
+                        or browse your files
+                    </p>
+
+                    <button class="browse-button">
+                        Browse Image
+                    </button>
+
+                    <input
+                        type="file"
+                        id="image2"
+                        accept="image/*"
+                        hidden
+                    >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Algorithm Selection -->
+        <section class="algorithm-section">
+
+            <div class="section-heading">
+                <span>01</span>
+                <div>
+                    <h2>Choose Matching Method</h2>
+                    <p>Select the computer vision algorithm to use.</p>
+                </div>
+            </div>
+
+
+            <div class="algorithm-options">
+
+                <button class="algorithm-card active" data-method="orb">
+                    <div class="algorithm-top">
+                        <span class="algorithm-name">ORB</span>
+                        <span class="algorithm-tag">FAST</span>
+                    </div>
+
+                    <p>
+                        Fast and computationally efficient
+                        binary feature matching.
+                    </p>
+
+                    <div class="algorithm-detail">
+                        Hamming Distance · CrossCheck
+                    </div>
+                </button>
+
+
+                <button class="algorithm-card" data-method="sift">
+                    <div class="algorithm-top">
+                        <span class="algorithm-name">SIFT</span>
+                        <span class="algorithm-tag">ROBUST</span>
+                    </div>
+
+                    <p>
+                        Robust feature detection for
+                        scale and viewpoint changes.
+                    </p>
+
+                    <div class="algorithm-detail">
+                        L2 Distance · Ratio Test
+                    </div>
+                </button>
+
+
+                <button class="algorithm-card" data-method="both">
+                    <div class="algorithm-top">
+                        <span class="algorithm-name">BOTH</span>
+                        <span class="algorithm-tag">COMPARE</span>
+                    </div>
+
+                    <p>
+                        Run both algorithms and compare
+                        their matching performance.
+                    </p>
+
+                    <div class="algorithm-detail">
+                        ORB vs SIFT
+                    </div>
+                </button>
+
+            </div>
+
+
+            <button class="match-button" id="matchButton">
+                <span>Match Features</span>
+                <span class="arrow">→</span>
+            </button>
+
+        </section>
+
+
+        <!-- Results Section -->
+        <section class="results-section">
+
+            <div class="section-heading">
+                <span>02</span>
+                <div>
+                    <h2>Matching Results</h2>
+                    <p>Feature correspondences and performance statistics.</p>
+                </div>
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>KEYPOINTS</span>
+                    <strong id="keypointsStat">—</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>MATCHES</span>
+                    <strong id="matchesStat">—</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>PROCESSING TIME</span>
+                    <strong id="timeStat">—</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>METHOD</span>
+                    <strong id="methodStat">—</strong>
+                </div>
+
+            </div>
+
+
+            <div class="result-visualization">
+
+                <div class="result-header">
+                    <h3>Feature Correspondences</h3>
+                    <span id="resultStatus">Waiting for images</span>
+                </div>
+
+                <div class="result-image-container">
+
+                    <div class="empty-result">
+                        <div class="result-icon">✦</div>
+
+                        <h3>Your matching visualization will appear here</h3>
+
+                        <p>
+                            Upload two images and select a matching
+                            method to begin the analysis.
+                        </p>
+                    </div>
+
+                    <img
+                        id="resultImage"
+                        alt="Feature matching result"
+                        hidden
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <span>Computer Vision Mini-Project</span>
+        <span>ORB / SIFT + BFMatcher</span>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
